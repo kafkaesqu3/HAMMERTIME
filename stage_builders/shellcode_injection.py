@@ -20,6 +20,11 @@ class Shellcode_Injection(Stage):
         template = template.replace("___X64_PROCNAME_MARKER___", x64_process)
         template = template.replace("___X64_SHELLCODE_MARKER___", x64_shellcode)
         print(template)
+        return template
 
-    def build(self):
-        self.set_template(self.params['injection_type'])
+    def build(self, build_directory):
+        template = self.set_template(self.params['injection_type'])
+        out_file = "{}/output.cs".format(build_directory)
+        output = open(out_file, "w")
+        output.write(template)
+        return out_file
