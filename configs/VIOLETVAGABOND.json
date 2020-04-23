@@ -14,7 +14,7 @@
 			"_injection_type_comment": "Currently only QueueUserAPC is supported",
 			"process": {
 				"action":"spawn",
-				"_action_comment":"spawn=spawn a new process, existing=inject into an existing process",
+				"_action_comment":"spawn=spawn a new process, existing=inject into an existing process. Currently only spawn is supported",
 				"x86_process_name":"C:\\Program Files (x86)\\internet explorer\\iexplore.exe",
 				"x64_process_name":"C:\\Windows\\System32\\WerFault.exe"
 			}

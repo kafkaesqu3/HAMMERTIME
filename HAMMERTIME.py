@@ -12,4 +12,4 @@ if parsed_conf['stage0']:
     print("Stage0: {}".format(stage0))
     if stage0 == "shellcode_injection":
         stage0_builder = Shellcode_Injection(stage0_params)
-    
+        stage0_builder.build()
