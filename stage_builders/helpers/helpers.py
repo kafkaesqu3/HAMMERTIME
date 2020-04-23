@@ -6,6 +6,7 @@ def get_os():
     #darwin
 
 def check_prereqs(prereqs):
+    prereqs = prereqs.split(',')
     for prereq in prereqs: 
         if "os" in prereq:
             os = prereq.split(":")[1]

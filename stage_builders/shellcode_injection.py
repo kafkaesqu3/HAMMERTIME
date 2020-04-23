@@ -1,14 +1,7 @@
-from stage_builders.helpers.helpers import *
+from stage_builders.stage import Stage
 
-class Shellcode_Injection: 
-    def __init__(self, params):
-        self.params = params['action_params']
-        prereqs = params['action_prereqs']
-        if prereqs: 
-            if not check_prereqs(prereqs):
-                print("Missing prereq")
-
-    
+class Shellcode_Injection(Stage): 
+   
     def set_template(self, template_name):
         filepath = "templates/shellcode_injection/{}/{}.cs".format(template_name, template_name)
         x86_process = self.params['process']['x86_process_name']
