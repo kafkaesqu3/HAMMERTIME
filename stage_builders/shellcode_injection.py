@@ -1,4 +1,4 @@
-from helpers.helpers import *
+from stage_builders.helpers.helpers import *
 
 class Shellcode_Injection: 
     def __init__(self, params):
@@ -29,4 +29,4 @@ class Shellcode_Injection:
         print(template)
 
     def build(self):
-        self.fetch_template(self.params['injection_type'])
+        self.set_template(self.params['injection_type'])
