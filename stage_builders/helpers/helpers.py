@@ -7,7 +7,7 @@ def get_os():
 
 def check_prereqs(prereqs):
     for prereq in prereqs: 
-        if prereq.contains("os"):
+        if "os" in prereq:
             os = prereq.split(":")[1]
             if os != get_os():
                 return False
