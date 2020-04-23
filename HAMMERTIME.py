@@ -17,10 +17,16 @@ os.makedirs(build_directory, exist_ok = False)
 def stage_loader(stage, previous_stage): 
     name = stage['action']
     if name == "shellcode_injection":
-        stage_builder = Shellcode_Injection(stage, previous_stage)
+        try: 
+            stage_builder = Shellcode_Injection(stage, previous_stage)
+        except OSError: 
+            print("Stage builder does not support your OS")
         return stage_builder.build(build_directory)
     elif name == "gadget2jscript":
-        stage_builder = Gadget2JScript(stage, previous_stage)
+        try: 
+            stage_builder = Gadget2JScript(stage, previous_stage)
+        except OSError: 
+            print("Stage builder does not support your OS")
         return stage_builder.build(build_directory)
     else: 
         print("Stage {} not supported".format(name))
