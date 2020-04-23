@@ -1,14 +1,20 @@
+from helpers.helpers import *
+
 class Shellcode_Injection: 
-    def __init__(self, args):
-        self.args = args
+    def __init__(self, params):
+        self.params = params['action_params']
+        prereqs = params['action_prereqs']
+        if prereqs: 
+            if not check_prereqs(prereqs):
+                print("Missing prereq")
 
     
     def set_template(self, template_name):
         filepath = "templates/shellcode_injection/{}/{}.cs".format(template_name, template_name)
-        x86_process = self.args['process']['x86_process_name']
-        x86_shellcode = self.args['shellcode_x86']['shellcode_val']
-        x64_process = self.args['process']['x64_process_name']
-        x64_shellcode = self.args['shellcode_x64']['shellcode_val']
+        x86_process = self.params['process']['x86_process_name']
+        x86_shellcode = self.params['shellcode_x86']['shellcode_val']
+        x64_process = self.params['process']['x64_process_name']
+        x64_shellcode = self.params['shellcode_x64']['shellcode_val']
         try: 
             f = open(filepath, 'r')
         except: 
@@ -23,4 +29,4 @@ class Shellcode_Injection:
         print(template)
 
     def build(self):
-        self.fetch_template(self.args['injection_type'])
+        self.fetch_template(self.params['injection_type'])
