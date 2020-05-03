@@ -12,3 +12,4 @@ def check_prereqs(prereqs):
             os = prereq.split(":")[1]
             if os != get_os():
                 return False
+    return True

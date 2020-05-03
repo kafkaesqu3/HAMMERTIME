@@ -3,13 +3,12 @@ from stage_builders.stage import Stage
 class Shellcode_Injection(Stage): 
    
     def set_template(self, template_name):
-        injection_type = self.params['injection_type']
-        if injection_type == "QueueUserAPC": 
+        if template_name == "RemoteInject_QueueUserAPC": 
             filepath = "templates/shellcode_injection/{}/{}.cs".format(template_name, template_name)
-        elif injection_type == "CreateRemoteThread": 
+        elif template_name == "RemoteInject_CreateRemoteThread": 
             pass
-        elif injection_type == "CreateThread": 
-            pass
+        elif template_name == "CreateThread": 
+            filepath = "templates/shellcode_injection/{}/{}.cs".format(template_name, template_name)
 
         x86_process = self.params['process']['x86_process_name']
         x86_shellcode = self.params['shellcode_x86']['shellcode_val']
@@ -31,6 +30,9 @@ class Shellcode_Injection(Stage):
 
     def build(self, build_directory):
         template = self.set_template(self.params['injection_type'])
+        if not template: 
+            print("Error building template file")
+            return False
         out_file = "{}/output.cs".format(build_directory)
         output = open(out_file, "w")
         output.write(template)

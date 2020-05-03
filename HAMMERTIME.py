@@ -27,6 +27,7 @@ def stage_loader(stage, previous_stage):
             stage_builder = Gadget2JScript(stage, previous_stage)
         except OSError: 
             print("Stage builder does not support your OS")
+            return False
         return stage_builder.build(build_directory)
     else: 
         print("Stage {} not supported".format(name))
@@ -37,4 +38,7 @@ for current_stage in parsed_conf['stages']:
     action = current_stage['action']
     print("Building stage: {}".format(action))
     finished_stage = stage_loader(current_stage, previous_stage)
-    previous_stage = finished_stage
+    if finished_stage: 
+        previous_stage = finished_stage
+    else: 
+        print("Stage build has FAILED")
