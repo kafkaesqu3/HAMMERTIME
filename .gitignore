@@ -1,5 +1,6 @@
 .DS_Store
 *.pyc
+*.exe
 *.pdb
 *.cache
 build_outputs/*

