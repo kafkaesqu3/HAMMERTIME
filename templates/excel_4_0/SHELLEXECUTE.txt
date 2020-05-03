@@ -1,2 +1,1 @@
  =CALL("Shell32","ShellExecuteA","JJCCCJJ",0,"open","___CMD_MARKER___","___ARGS_MARKER___",0,5)
- =HALT()

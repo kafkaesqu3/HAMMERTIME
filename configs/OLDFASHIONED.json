@@ -43,7 +43,7 @@
 			}
         },
         {
-			"action":"xlm_obfuscate",
+			"action":"'xlm_obfuscate'",
 			"action_prereqs":"",
 			"action_params": {
 				"obfuscation":"concatenate"
