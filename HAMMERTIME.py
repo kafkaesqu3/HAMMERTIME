@@ -5,6 +5,7 @@ from stage_builders.shellcode_injection import *
 from stage_builders.gadget2jscript import *
 from stage_builders.xlm_download import *
 from stage_builders.xlm_execute import *
+from stage_builders.xlm_inject import *
 
 CONFIG = "configs/OLDFASHIONED.json"
 
@@ -38,7 +39,8 @@ def stage_loader(stage, previous_stage):
         stage_builder = XLM_Execute(stage, previous_stage)
         return stage_builder.build(build_directory)
     elif name == "xlm_inject":
-        pass
+        stage_builder = XLM_Inject(stage, previous_stage)
+        return stage_builder.build(build_directory)
     elif name == "xlm_sandboxcheck":
         pass
     elif name == "xlm_obfuscate":
