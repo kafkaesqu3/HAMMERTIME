@@ -9,6 +9,6 @@ class XLM_Download(Stage):
         template = template.replace("___URL_MARKER___", url)
         template = template.replace("___PATH_MARKER___", path)
         if self.params['final_action'] == "true":
-            template += "=HALT()"
+            template += "\n=HALT()"
         print(template)
         return template

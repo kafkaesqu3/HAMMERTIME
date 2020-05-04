@@ -28,7 +28,7 @@ class XLM_Inject(Stage):
         f = open('templates/excel_4_0/CreateThread')
         template = f.read()
         if self.params['final_action'] == "true":
-            template += "=HALT()"
+            template += "\n=HALT()"
         print("--------------------------")
         print("MACRO code: paste this into the first column of XLM macro sheet")
         print(template)

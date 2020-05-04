@@ -16,7 +16,7 @@ class XLM_Execute(Stage):
         template = template.replace("___CMD_MARKER___", cmd)
         template = template.replace("___ARGS_MARKER___", args)
         if self.params['final_action'] == "true":
-            template += "=HALT()"
+            template += "\n=HALT()"
         print(template)
         return template
         
