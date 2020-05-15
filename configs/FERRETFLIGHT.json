@@ -1,0 +1,9 @@
+{
+	"name":"FERRETFLIGHT",
+	"version":"0.1",
+	"author":"david",
+	"description":"VBA macro profile macro which makes intelligence descisions on next steps",
+	"TTP":[""],
+	"stages": [
+    ]
+}

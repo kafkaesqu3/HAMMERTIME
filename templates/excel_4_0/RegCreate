@@ -1,0 +1,3 @@
+=REGISTER("advapi32", "RegCreateKeyA", "JJCN", "CreateKey", , 1, 9)
+=CreateKey(-2147483647, "__REGKEY_MARKER___",R99999C1)
+=HALT()

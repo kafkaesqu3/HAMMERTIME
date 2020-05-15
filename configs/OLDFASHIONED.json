@@ -55,7 +55,9 @@
 			"action_prereqs":"",
 			"_action_comments":"This stage can modify the registry (for COM hijack, setting persistence via homepage, etc). Should work on x86 and x64 excel installations",
 			"action_params": {
-				"reg_key":{"name": "test", "value": "test"},
+				"reg_key_add":[{"name": "test", "value": "test"}],
+				"reg_key_modify":[{"name": "test", "value": "test"}],
+				"reg_key_delete":[{"name": "test", "value": "test"}],
 				"final_action":"false",
 				"_final_action_comment":"set this to true indicates the macro is complete. this adds the HALT() command to the end of the stage"
 			}
@@ -73,7 +75,7 @@
 			"action_prereqs":"",
 			"_action_comments":"Obfuscates the XLM macro",
 			"action_params": {
-				"obfuscation":"concatenate"
+				"obfuscation":"XLMfuscator.py"
 			}
 		}
 	]
