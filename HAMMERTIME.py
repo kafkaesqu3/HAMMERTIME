@@ -1,6 +1,7 @@
 import json
 import time
 import os
+import argparse
 from stage_builders.shellcode_injection import *
 from stage_builders.gadget2jscript import *
 from stage_builders.xlm_download import *
@@ -9,9 +10,22 @@ from stage_builders.xlm_inject import *
 from stage_builders.xlm_regkey import *
 from stage_builders.xlm_obfuscate import *
 from stage_builders.xlm_sandboxcheck import *
+from stage_builders.exe_to_shellcode import *
+from stage_builders.encrypt_aes import *
+from stage_builders.encrypt_xor import *
+from stage_builders.crossfit import *
+from stage_builders.get_file import *
+from stage_builders.compile_sln import *
 
 
-CONFIG = "configs/OLDFASHIONED.json"
+parser = argparse.ArgumentParser(description='Flexible multi-stage payload builder framework')
+parser.add_argument('-c','--config', help='path to config file', required=False)
+args = parser.parse_args()
+
+if not args.config: 
+    CONFIG = "configs/HELLFIRE.json"
+else: 
+    CONFIG = args.config
 
 config_file = open(CONFIG, "r")
 parsed_conf = (json.loads(config_file.read()))
@@ -23,7 +37,10 @@ os.makedirs(build_directory, exist_ok = False)
 
 def stage_loader(stage, previous_stage): 
     name = stage['action']
-    if name == "shellcode_injection":
+    if name == "getfile":
+        stage_builder = GetFile(stage, previous_stage)
+        return stage_builder.build(build_directory)
+    elif name == "shellcode_injection":
         try: 
             stage_builder = Shellcode_Injection(stage, previous_stage)
         except OSError: 
@@ -54,6 +71,21 @@ def stage_loader(stage, previous_stage):
     elif name == "xlm_regkey":
         stage_builder = XLM_Regkey(stage, previous_stage)
         return stage_builder.build(build_directory)
+    elif name == "exe2shellcode_srdi":
+        stage_builder = Exe2Shellcode(stage, previous_stage)
+        return stage_builder.build(build_directory)
+    elif name == "crossfit":
+        stage_builder = Crossfit(stage, previous_stage)
+        return stage_builder.build(build_directory)
+    elif name == "encrypt_aes":
+        stage_builder = EncryptAES(stage, previous_stage)
+        return stage_builder.build(build_directory)
+    elif name == "encrypt_xor":
+        stage_builder = EncryptXOR(stage, previous_stage)
+        return stage_builder.build(build_directory)
+    elif name == "compile_sln":
+        stage_builder = CompileSln(stage, previous_stage)
+        return stage_builder.build(build_directory)
     else: 
         print("Stage {} not supported".format(name))
         return False
@@ -67,3 +99,5 @@ for current_stage in parsed_conf['stages']:
         previous_stage = finished_stage
     else: 
         print("Stage build has FAILED")
+
+print("STOP! HAMMERTIME!")
